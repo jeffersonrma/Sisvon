@@ -1,0 +1,187 @@
+﻿@using Sisvon.Model.Entities.Enum
+@model Sisvon.Model.Entities.Pedido
+
+@{
+    ViewBag.Title = "DetalhePedido";
+}
+
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        @{
+            string status = "", classe = "";
+
+
+            switch (Model.Status)
+            {
+                case Status.AguardandoPagamento:
+                    status = "Aguardando Pagamento";
+                    break;
+                case Status.Cancelado:
+                    status = "Pedido Cancelado";
+                    classe = "#f2dede";
+                    break;
+                case Status.PagamentoConfirmado:
+                    status = "Pagamento Confirmado";
+                    classe = "#fcf8e3";
+                    break;
+                case Status.ProdutoPostado:
+                    status = "Produto Enviado";
+                    classe = "#dff0d8";
+                    break;
+            }
+
+            string frete = "";
+
+
+            switch (Model.TipoFrete)
+            {
+                case Frete.Pac:
+                    frete = "PAC";
+                    break;
+                case Frete.Sedex:
+                    frete = "SEDEX";
+                    break;
+            }
+
+            string pag = "";
+
+
+            switch (Model.FormaPagamento)
+            {
+                case FormaPagamento.Boleto:
+                    pag = "Boleto";
+                    break;
+                case FormaPagamento.Deposito:
+                    pag = "Depósito";
+                    break;
+
+            }
+        }
+        <h2 style="background-color: @classe;line-height: 2">Pedido @Model.PedidoId - @status</h2>
+        <hr />
+        <div class="col-sm-12">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Produto")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Qtde")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Total")
+                    </th>
+                </tr>
+                @if (Model != null)
+                {
+                    foreach (var item in Model.ItemsPedido)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Produto.Nome)
+                            </td>
+                            <td class="form-inline">
+                                @item.Qtde
+                            </td>
+                            <td>
+                                <span>R$: </span> @item.PrecoTotal;
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <div class="col-sm-4 col-sm-offset-1">
+            <h3 class="text-center">Detalhes</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <span>Frete:</span>
+                </dt>
+                <dd>
+                    @(Model == null ? "" : frete)
+                </dd>
+                <dt>
+                    <span>Tipo de pagamento: </span>
+                </dt>
+                <dd>
+                    @(Model == null ? "" : pag)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-sm-4 col-sm-offset-2">
+            <h3 class="text-center">Total</h3>
+            <hr />
+            <div class="text-right">
+                <dl class="dl-horizontal">
+                    <dt>
+                        <span>Valor: </span>
+                    </dt>
+                    <dd>
+                        <span>R$: </span> @(Model == null ? "" : Model.ValorTotal.ToString())
+                    </dd>
+                    <dt>
+                        <span>Frete: </span>
+                    </dt>
+                    <dd>
+                        <span>R$: </span> @(Model == null ? "" : Model.ValorFrete.ToString())
+                    </dd>
+                </dl>
+                <div class="totalContent h4">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            <strong>Total: </strong>
+                        </dt>
+                        <dd>
+                            <span>R$: </span> @(Model == null ? "0,00" : (Model.ValorTotal + Model.ValorFrete).ToString())
+                        </dd>
+                    </dl>
+                </div>
+
+            </div>
+
+        </div>
+        <br />
+        <br />
+        <br />
+
+
+        @{
+            switch (Model.FormaPagamento)
+            {
+                case FormaPagamento.Boleto:
+                    <a href="@Url.Action("Boleto", "Pedido", new {pedidoId = Model.PedidoId})" target="_blank" class="btn btn-default">Imprimir Boleto</a>
+                    break;
+                case FormaPagamento.Deposito:
+
+                <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Informações para pagamento
+                </button>
+                <div class="collapse" id="collapseExample">
+                    <div class="well" style="overflow: auto;">
+                        @Html.Action("Deposito", "Pedido", new { valor = Model.ValorTotal })
+                    </div>
+                </div>
+
+                    break;
+            }
+        }
+
+
+        <div class="col-sm-12 text-center">
+
+            <hr />
+
+        </div>
+
+        <div class="col-sm-12" style="margin-top: 45px;">
+
+            <a href="@Url.Action("MeusPedidos", "Cliente")" class="btn btn-default">
+                Meus Pedidos
+            </a>
+        </div>
+    </div>
+
+
+
+</div>

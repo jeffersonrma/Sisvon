@@ -1,0 +1,86 @@
+﻿@using Sisvon.Model.Entities.Enum
+@model SisvonMVC.ViewModels.CarrinhoVM
+
+@{
+    ViewBag.Title = "Finalizar Compra";
+}
+
+
+
+<div class="col-sm-12 bg-color-white">
+    <form class=" body-content-padding" method="POST">
+        <h2>Informações do pedido</h2>
+        <hr />
+        @if (Model != null)
+        {
+            <div class="col-sm-4 col-sm-offset-1">
+                <h3 class="center-text">Escolha o tipo de frete</h3>
+                <hr />
+
+                <div class="radio">
+                    <label>@Html.RadioButtonFor(m => m.FreteSelecionado, Frete.Pac) PAC</label>
+                </div>
+                <div class="radio">
+                    <label>@Html.RadioButtonFor(m => m.FreteSelecionado, Frete.Sedex) SEDEX</label>
+                </div>
+
+
+                <button type="submit" name="btnSubmit" value="selecionar" class="btn btn-success btn-xs">Calcular</button>
+
+                @Html.ValidationMessageFor(model => model.FreteSelecionado, "Escolha um frete", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-4 col-sm-offset-2">
+                <h3 class="text-center">Forma de pagamento</h3>
+                <hr />
+
+                <div class="radio">
+                    <label>@Html.RadioButtonFor(m => m.FormaPagamento, FormaPagamento.Boleto) Boleto</label>
+                </div>
+                <div class="radio">
+                    <label>@Html.RadioButtonFor(m => m.FormaPagamento, FormaPagamento.Deposito) Depósito</label>
+                </div>
+                @Html.ValidationMessageFor(m => m.FormaPagamento, "Escolha uma forma de pagamento", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="col-sm-4 col-sm-offset-2" style="margin-top: 50px;">
+                <h3 class="center-text">Total</h3>
+                <hr />
+
+                <div class="text-right">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            <span>Valor:  </span>
+                        </dt>
+                        <dd>
+                            <span>R$: </span> @(Model == null ? "0,00" : Model.TotalProdutos.ToString())
+                        </dd>
+                        <dt>
+                            <span>Frete: </span>
+                        </dt>
+                        <dd>
+                            <span>R$: </span> @(Model == null ? "0,00" : Model.ValorFrete.ToString())
+                        </dd>
+                    </dl>
+                    <div class="totalContent h4">
+
+                        <dl class="dl-horizontal">
+
+                            <dt>
+                                <strong>Total </strong>
+                            </dt>
+                            <dd>
+                                <span>R$: </span> @(Model == null ? "0,00" : Model.Total.ToString())
+                            </dd>
+                        </dl>
+                    </div>
+
+                </div>
+            </div>
+        }
+        <div style="margin-top: 20px" class="col-sm-12 text-right">
+            <button type="submit" name="btnSubmit" value="continuar" class="btn btn-success">Continuar</button>
+        </div>
+    </form>
+
+</div>

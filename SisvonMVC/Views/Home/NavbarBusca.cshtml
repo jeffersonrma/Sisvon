@@ -1,0 +1,16 @@
+﻿
+<form method="GET" action="@Url.Action("Buscar","Produto")" class="container">
+    <div class="row">
+
+        <div id="custom-search-input">
+            <div class="input-group">
+                <input type="text" name="busca" class="search-query form-control" value="@TempData["busca"]" placeholder="Buscar Produto" />
+                <span class="input-group-btn">
+                    <button class="btn btn-danger" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,53 @@
+﻿@using System.Linq
+@model System.Collections.Generic.IEnumerable<Sisvon.Model.Entities.Produto>
+
+@if (Model != null && Model.Any())
+{
+    int count = 0;
+
+    <div id="carousel-destaque-produto" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            @foreach (var item1 in Model)
+            {
+                <li data-target="#carousel-destaque-produto" data-slide-to="@count" @(count == 0 ? "class='active'" : "")></li>
+                count++;
+            }
+        </ol>
+        @{
+    count = 0;
+        }
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            @foreach (var item2 in Model)
+            {
+                <div class="item  @(count == 0 ? "active" : "")">
+                    <a href="@Url.Action("Detalhes", "Produto", new {id = item2.ProdutoId, produtoNome = item2.Nome})">
+                        @Html.Action("MostrarUmaFoto", "Produto", new { ProdutoOrdem = item2.Ordem })
+                    </a>
+                    <div class="carousel-caption">
+                        <a  href="@Url.Action("Detalhes", "Produto", new {id = item2.ProdutoId, produtoNome = item2.Nome})">
+                            <h4>@item2.Nome</h4>
+                            <p>cod: @item2.Codigo</p>
+                            <h2 class="color-red">
+                                @(item2.EstoqueDisponivel > 0 ? "R$" + item2.Preco.ToString("N") : "Produto indisponível")
+                            </h2>
+                        </a>
+                    </div>
+
+                </div>
+                count++;
+            }
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-destaque-produto" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-destaque-produto" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+}
+

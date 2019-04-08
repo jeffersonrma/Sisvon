@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Relatório de Pedidos";
+}
+
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        <h2>Relatório de Pedidos</h2>
+        <hr />
+        <form class="col-sm-4 col-sm-offset-4" target="_blank" action="@Url.Action("ImprimirRelatorioPedidos")" method="POST">
+            <label for="dataInicial">Data Inicial:</label>
+            <input class="form-control"  name="dataInicial" id="dataInicial" readonly />
+            <label for="dataFinal">Data Final:</label>
+            <input class="form-control"  name="dataFinal" id="dataFinal" readonly />
+            <hr />
+            <button type="submit" class="btn btn-success">Gerar Relatório</button>
+        </form>
+    </div>
+</div>
+
+@section scripts
+{
+    <link rel="stylesheet" href="~/Content/themes/base/jquery-ui-1.12.1/jquery-ui.css"/>
+    <script type="text/javascript" src="~/Scripts/datepicker-pt-BR.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#dataInicial").datepicker(
+            {
+                maxDate: new Date(),
+                onSelect: function (dateText, inst) {
+                    $("#dataFinal").datepicker("destroy");
+                    $("#dataFinal").datepicker({
+                        maxDate: new Date(),
+                        minDate: dateText
+                    });
+                }
+            });
+        });
+        $(function () {
+            $("#dataFinal").datepicker(
+            {
+                maxDate: new Date()
+            });
+        });
+        
+        
+
+    </script>
+}
+

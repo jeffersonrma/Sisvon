@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+
+
+
+<div class="col-sm-12 bg-color-white ">
+    <div class=" col-sm-12 body-content-padding">
+        <h2>Acesse sua conta</h2>
+        <hr/>
+        <div class="col-sm-4 col-sm-offset-1">
+            <h3>Ainda não tem cadastro?</h3>
+            <div style="margin-top:10px" class="form-group">
+                <!-- Button -->
+                <div class="col-sm-12 controls text-right">
+                    <a class="btn btn-success btn-block" href="@Url.Action("Cadastrar","Cliente",new{ pedido = true})" >Cadastre-se</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-sm-offset-2">
+            <h3>Já tem um cadastro?</h3>
+            <form id="loginform" method="POST" action="@Url.Action("Logar","Login")" class="form-horizontal" role="form" autocomplete="off">
+                <div style="margin-bottom: 10px" class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user color-green"></i></span>
+                    <!-- EMAIL ADDRESS -->
+                    <input type="email" class="form-control" name="txtLogin" id="txtLogin" placeholder="Email" required>
+                </div>
+                <div style="margin-bottom: 10px" class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock color-green"></i></span>
+                    <!--  PASSWORD  -->
+                    <input type="password" class="form-control" id="txtSenha" name="txtSenha" placeholder="Senha" required>
+                </div>
+                <div class="center-text hidden">
+                    <span class="error-message color-red"><i class="glyphicon glyphicon-warning-sign"></i> Username & password don't match!</span>
+                </div>
+                <div style="margin-top:10px" class="form-group">
+                    <!-- Button -->
+                    <div class="col-sm-12 controls text-right">
+                        <button id="btn-login" type="submit" class="btn btn-success">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

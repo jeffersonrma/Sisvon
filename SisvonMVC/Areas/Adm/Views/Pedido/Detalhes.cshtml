@@ -1,0 +1,220 @@
+﻿@using Sisvon.Model.Entities.Enum
+@model Sisvon.Model.Entities.Pedido
+
+@{
+    ViewBag.Title = "Detalhes";
+    string frete = "";
+
+
+    switch (Model.TipoFrete)
+    {
+        case Frete.Pac:
+            frete = "PAC";
+            break;
+        case Frete.Sedex:
+            frete = "SEDEX";
+            break;
+    }
+
+    string pag = "";
+
+
+    switch (Model.FormaPagamento)
+    {
+        case FormaPagamento.Boleto:
+            pag = "Boleto";
+            break;
+        case FormaPagamento.Deposito:
+            pag = "Depósito";
+            break;
+    }
+
+}
+
+<div class="col-sm-12">
+    <div class="body-content-padding">
+        <h2>Pedido - @Model.PedidoId</h2>
+        <hr />
+        <h3>Itens</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Código")
+                </th>
+                <th>
+                    @Html.DisplayName("Nome")
+                </th>
+                <th>
+                    @Html.DisplayName("Preço Un")
+                </th>
+
+                <th>
+                    @Html.DisplayName("Qtde")
+                </th>
+                <th>
+                    @Html.DisplayName("Total")
+                </th>
+
+            </tr>
+
+            @if (Model != null)
+            {
+                foreach (var item in Model.ItemsPedido)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Produto.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Produto.Nome)
+                        </td>
+                        <td>
+                            R$ @item.Produto.Preco.ToString("N")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qtde)
+                        </td>
+                        <td>
+                            R$ @item.PrecoTotal.ToString("N")
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+
+        <div class="col-sm-4" style="overflow: hidden">
+            <h3 class="text-center">Detalhes</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <span>Código</span>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PedidoId)
+                </dd>
+                <dt>
+                    <span>Data do Pedido </span>
+                </dt>
+                <dd>
+                    <span>@Model.DataPedido.ToShortDateString()</span>
+                </dd>
+                <dt>
+                    <span>Cliente</span>
+                </dt>
+                <dd>
+                    <span>
+                        @Html.ActionLink(@Model.Cliente.Nome, "ConsultarCliente", "Cliente", 
+                        new { id = Model.Cliente.ClienteId },
+                        new { @class = "btn btn-success btn-xs", title = @Model.Cliente.Nome })
+                    </span>
+                </dd>
+            </dl>
+        </div>
+        <div class="col-sm-4">
+            <h3 class="text-center">Pagamento</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <span>Forma de pagamento</span>
+                </dt>
+                <dd>
+                    <span>@pag</span>
+                </dd>
+                <dt>
+                    <span>Data do pagamento</span>
+                </dt>
+                <dd>
+                    @(Model.DataPagamento == DateTime.MinValue ? "---" : @Model.DataPagamento.ToShortDateString())
+                </dd>
+
+                <dt>
+                    <span>Valor Total </span>
+                </dt>
+                <dd>
+                    R$ @Model.ValorTotal.ToString("N")
+                </dd>
+            </dl>
+        </div>
+        <div class="col-sm-4">
+            <h3 class="text-center">Frete</h3>
+            <hr />
+            <dl class="dl-horizontal">
+
+                <dt>
+                    <span>Tipo de frete </span>
+                </dt>
+                <dd>
+                    <span>@frete</span>
+                </dd>
+                <dt>
+                    <span>Data do Envio</span>
+                </dt>
+                <dd>
+                    @(Model.DataEnvio == DateTime.MinValue ? "---" : @Model.DataEnvio.ToShortDateString())
+                </dd>
+                <dt>
+                    <span>Valor do Frete</span>
+                </dt>
+                <dd>
+                    R$ @Model.ValorFrete.ToString("N")
+                </dd>
+
+            </dl>
+        </div>
+        <form id="pedidoForm" method="post" action="@Url.Action("Editar", "Pedido")">
+            @Html.HiddenFor(p => p.PedidoId)
+            <div class="col-sm-12 form-group">
+                <hr />
+                <h3 class="text-center">Status do pedido</h3>
+
+                <select class="form-control valid" data-val="true" data-val-required="O campo Status é obrigatório." id="Status" name="Status" aria-required="true" aria-invalid="false" aria-describedby="Status-error">
+                    <option @(Model.Status == Status.AguardandoPagamento ? "selected" : "") style="background-color: " value="1">Aguardando Pagamento</option>
+                    <option @(Model.Status == Status.PagamentoConfirmado ? "selected" : "") style="background-color: #fcf8e3 " value="2">Pagamento Confirmado</option>
+                    <option @(Model.Status == Status.ProdutoPostado ? "selected" : "") style="background-color: #dff0d8 " value="3">Produto Enviado</option>
+                    <option @(Model.Status == Status.Cancelado ? "selected" : "") style="background-color: #f2dede " value="4">Cancelado</option>
+                </select>
+            </div>
+            <div class="form-group">
+
+                <div class="col-md-2 ">
+                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-sm btn-warning" })
+                </div>
+                <div class="col-md-10">
+                    <button type="button" id="btn-submit" class="btn-success btn">Salvar status</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $('#btn-submit').click(function () {
+            bootbox.dialog({
+                title: "Salvar Pedido?",
+                message: "Deseja mudar o status do pedido?",
+                locale: "br",
+                buttons: {
+                    Cancelar: {
+                        label: "Cancelar",
+                        className: "btn-danger"
+                    },
+                    Confirmar: {
+                        label: "Confirmar",
+                        className: "btn-success",
+                        callback: function (result) {
+                            if (result) {
+                                $('form').submit();
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+
+

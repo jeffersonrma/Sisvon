@@ -1,0 +1,5 @@
+
+Log Entry : 15:45:12 domingo, 8 de maio de 2016
+  :
+  :The underlying provider failed on Open.
+-------------------------------

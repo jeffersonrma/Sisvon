@@ -1,0 +1,24 @@
+﻿<div class="errosystem">
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>@TempData["Sucesso"]</strong>
+        </div>
+
+    }
+   @if (TempData["Erro"] != null)
+   {
+       <div class="alert alert-danger" role="alert">
+           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           <strong>@TempData["Erro"]</strong>
+       </div>
+   } 
+</div>
+
+
+
+
+

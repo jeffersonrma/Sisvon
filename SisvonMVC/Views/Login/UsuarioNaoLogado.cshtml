@@ -1,0 +1,41 @@
+﻿<div class="usuarioLogado">
+    <ul class="list-unstyled">
+        <li>@Html.ActionLink("Cadastre-se", "Cadastrar", "Cliente",null, htmlAttributes: new { @class = "color-white" })</li>
+        <li class="dropdown"> <span class="color-white">ou</span><a href="#" class="dropdown-toggle color-white" data-toggle="dropdown"> Entre <span class="caret"></span></a>
+            <ul class="dropdown-menu login-panel">
+                <li>
+                    <div class="dropdown-header">
+                        <span class="login-header color-green">Entrar</span>
+                        
+                    </div>
+                    <div class="clearfix"></div>
+                    <div style="padding: 8px;">
+                        <form id="loginform" method="POST" action="@Url.Action("Logar","Login")" class="form-horizontal" role="form" autocomplete="off">
+                            <div style="margin-bottom: 10px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user color-green"></i></span>
+                                <!-- USERNAME OR EMAIL ADDRESS -->
+                                <input type="email" class="form-control" name="txtLogin" id="txtLogin" placeholder="Email" required>
+                            </div>
+                            <div style="margin-bottom: 10px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock color-green"></i></span>
+                                <!--  PASSWORD  -->
+                                <input type="password" class="form-control" id="txtSenha" name="txtSenha" placeholder="Senha" required>
+                            </div>
+                            <div class="center-text hidden">
+                                <span class="error-message color-red"><i class="glyphicon glyphicon-warning-sign"></i> Username & password don't match!</span>
+                            </div>
+                            <div style="margin-top:10px" class="form-group">
+                                <!-- Button -->
+                                <div class="col-sm-12 controls center-text">
+                                    <button id="btn-login" type="submit" class="btn btn-block btn-success">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <!--<li class="divider"></li>-->
+            </ul>
+        </li>
+
+    </ul>
+</div>

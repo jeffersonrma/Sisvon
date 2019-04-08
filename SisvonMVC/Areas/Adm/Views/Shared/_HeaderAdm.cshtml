@@ -1,0 +1,25 @@
+﻿<header>
+    <div class="width100">
+
+        <div id="logo">
+            <a href="~/adm"><img src="~/Content/Imagem/weblogo.png" /></a>
+        </div>
+
+
+
+        <div class="col-xs-12 col-offset-250">
+            <div id="header">
+                <h2 style="float: left;line-height: 2.9;" class="text-left">
+                    Área Administrativa
+                </h2>
+                <div class="text-right" style="line-height:5; font-size: 17px;">
+                    
+                    @{Html.RenderAction("UsuarioLogado", "Login");}
+                </div>
+ 
+                
+            </div>
+        </div>
+    </div>
+
+</header>

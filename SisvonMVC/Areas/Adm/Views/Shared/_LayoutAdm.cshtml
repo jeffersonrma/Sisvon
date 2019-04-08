@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png" sizes="16x16">
+    <title>@ViewBag.Title - Comercial Portomat</title>
+    @Styles.Render("~/Content/cssAdm")
+    @Scripts.Render("~/bundles/modernizr")
+    <base href="@Url.Content("~/")"/>
+</head>
+<body>
+
+    <div id="headerArea">@{Html.RenderPartial("_HeaderAdm");}</div>
+    <div id="mainContentArea">
+        <div id="sidebarArea">@{Html.RenderAction("MenuLateral", "Home");}</div>
+        <div id="contentArea" class="col-sm-12 col-offset-250 footerPadding">
+            @Html.Partial("_ErrosSystem")
+            @RenderBody()
+        </div>
+    </div>
+    <div id="footer">@{Html.RenderPartial("_FooterAdm");}</div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/scriptsADM")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

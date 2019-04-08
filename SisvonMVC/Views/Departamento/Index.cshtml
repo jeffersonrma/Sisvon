@@ -1,0 +1,42 @@
+﻿@using System.Linq
+@using PagedList.Mvc
+@model PagedList.IPagedList<Sisvon.Model.Entities.Produto>
+@{
+    ViewBag.Title = ViewBag.Departamento;
+}
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        <h3>@ViewBag.Departamento</h3>
+        <hr />
+        @if (Model != null && Model.Any())
+        {
+            <ul class="produto-lista">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <a class="produto-lista-content" href="@Url.Action("Detalhes","Produto", new{id = item.ProdutoId, produtoNome = item.Nome})">
+                            @Html.Action("MostrarUmaFoto", "Produto", new { produtoOrdem = item.Ordem })
+                            <div id="caption">
+                                <span id="nome">@item.Nome</span>
+                                <span id="codigo">cod:@item.Codigo</span>
+                                <span id="preco">@(item.EstoqueDisponivel > 0 ? "R$" + @item.Preco : "Produto indisponível")</span>
+                            </div>
+                        </a>
+                    </li>
+                }
+
+            </ul>
+            if (Model.HasNextPage || Model.HasPreviousPage)
+            {
+                <div class="text-center col-sm-12" style="margin-top: 20px">
+                    @Html.PagedListPager(Model, p => Url.Action("Index", new { page = p }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+                </div>
+            }
+        }
+        else
+        {
+            <h4 class="text-center">Nem um produto encontrado</h4>
+        }
+
+    </div>
+</div>

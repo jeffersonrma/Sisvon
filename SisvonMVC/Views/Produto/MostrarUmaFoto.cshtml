@@ -1,0 +1,15 @@
+﻿@model ICollection<string>
+
+@if (Model != null && Model.Any())
+{
+    <div class="imagem-produto">
+        <img src="~/Imagens/Produtos/@Model.FirstOrDefault()" />
+    </div>
+}
+else
+{
+    <div class="imagem-produto">
+        <img src="~/Imagens/Produtos/sem-imagem.gif" />
+    </div>
+}
+

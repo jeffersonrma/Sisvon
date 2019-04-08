@@ -1,0 +1,39 @@
+﻿<div class="usuarioLogado dropdown">
+    <span class="color-white">Olá, </span> 
+    <a href="#" class="dropdown-toggle color-white" data-toggle="dropdown"> @ViewBag.UsuarioNome <span class="caret"></span></a>
+    <ul class="dropdown-menu login-panel">
+        <div class="container">
+            <li>
+                <div class="navbar-login">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h4 class="text-left">
+                                <strong>@ViewBag.UsuarioNome</strong>
+                            </h4>
+                            <p class="text-left small">@ViewBag.UsuarioEmail</p>
+                            <p class="text-left">
+                                <a href="@Url.Action("MeusPedidos","Cliente")" class="btn btn-success btn-block btn-sm">Meus Pedidos</a>
+                            </p>
+                            <p class="text-left">
+                                <a href="@Url.Action("MeuCadastro","Cliente")" class="btn btn-success btn-block btn-sm">Meu Cadastro</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <div class="navbar-login navbar-login-session">
+                    <div class="row">
+                        <div class="col-sm-4 col-sm-offset-8">
+                            <p>
+                                <a href="@Url.Action("Deslogar", "Login")" class="btn btn-sm btn-danger btn-block">Sair</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </div>
+        
+    </ul>
+</div>

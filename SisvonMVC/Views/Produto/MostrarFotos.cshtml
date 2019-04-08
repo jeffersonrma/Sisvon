@@ -1,0 +1,32 @@
+﻿@model IEnumerable<string>
+
+@if (Model.Any())
+{
+    <div class="product">
+
+        <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+            @foreach (var nome in Model)
+            {
+                <li data-thumb="@Url.Content("~/Imagens/Produtos/")@nome">
+                    <div class="prod-img">
+                        <img src="@Url.Content("~/Imagens/Produtos/")@nome" />
+                    </div>
+                    
+                </li>
+            }
+        </ul>
+    </div>
+
+}
+else
+{
+    <div class="product">
+
+        <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+            <li data-thumb="@Url.Content("~/Imagens/Produtos/sem-imagem.gif")">
+                <img src="@Url.Content("~/Imagens/Produtos/sem-imagem.gif")" />
+            </li>
+
+        </ul>
+    </div>
+}

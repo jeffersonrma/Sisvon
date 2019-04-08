@@ -1,0 +1,75 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Sisvon.Model.Entities.Cliente>
+
+@{
+    ViewBag.Title = "Clientes";
+}
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        <h2>Clientes</h2>
+        <form class="col-sm-5" method="GET" style="padding-bottom: 80px;">
+            <h4>Filtrar resultado:</h4>
+            <hr />
+            <div class="form-horizontal">
+                <div class="form-group form-group-sm">
+                    <label class="control-label col-sm-2" for="busca">buscar:</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="busca" placeholder="Nome ou CPF" name="busca" value="@ViewBag.busca" />
+                    </div>
+                </div>
+
+                <div class="form-group-sm form-group ">
+                    <button class="btn btn-success align-right" type="submit">Buscar</button>
+                </div>
+
+            </div>
+        </form>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Nome")
+                </th>
+                <th>
+                    @Html.DisplayName("CPF")
+                </th>
+                <th>
+                    @Html.DisplayName("E-Mail")
+                </th>
+                <th>
+                </th>
+
+                <th></th>
+            </tr>
+
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cpf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink(" ", "ConsultarCliente", new { id = item.ClienteId }, new { @class = "fa fa-search", title = "Detalhes" })
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+        @if (Model != null && (Model.HasNextPage || Model.HasPreviousPage))
+        {
+            <div class="text-center">
+                @Html.PagedListPager(Model, p => Url.Action("Index", new { page = p, busca = ViewBag.busca }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+            </div>
+        }
+    </div>
+</div>
+

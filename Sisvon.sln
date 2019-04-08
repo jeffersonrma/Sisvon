@@ -1,0 +1,91 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0_Presentation", "0_Presentation", "{6F195C86-A557-4126-AB37-F49594167B0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2_Application", "2_Application", "{8515BA70-1CDB-4F75-8D08-68678098BF56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4_Infra", "4_Infra", "{F964CB9C-4274-413A-961E-ABE3BDFCF6AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1_Data", "4.1_Data", "{66E6D97F-1A5C-4F9C-A834-F8B196511668}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sisvon.Model", "Sisvon.Model\Sisvon.Model.csproj", "{842A7AAF-EC1A-411E-B80D-B01A50290DEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sisvon.Infra.Data", "Sisvon.Infra.Data\Sisvon.Infra.Data.csproj", "{76A63653-21F3-4389-AA9F-3AF5B39017E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SisvonMVC", "SisvonMVC\SisvonMVC.csproj", "{9B118606-EF27-4B0B-BEA7-F5290F8C2443}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sisvon.BO", "Sisvon.BO\Sisvon.BO.csproj", "{C637E761-40A1-4BD0-AFA1-3385E9D0A906}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2_Service Agent", "4.2_Service Agent", "{B17163CD-32D0-4715-8097-8D63A7BFBAD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sisvon.Infra.ServiceAgent", "Sisvon.Infra.ServiceAgent\Sisvon.Infra.ServiceAgent.csproj", "{575A879A-429D-431C-AAC7-AADA032D6558}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://jeffersonrma.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Sisvon.BO\\Sisvon.BO.csproj
+		SccProjectTopLevelParentUniqueName1 = Sisvon.sln
+		SccProjectName1 = Sisvon.BO
+		SccLocalPath1 = Sisvon.BO
+		SccProjectUniqueName2 = Sisvon.Infra.Data\\Sisvon.Infra.Data.csproj
+		SccProjectTopLevelParentUniqueName2 = Sisvon.sln
+		SccProjectName2 = Sisvon.Infra.Data
+		SccLocalPath2 = Sisvon.Infra.Data
+		SccProjectUniqueName3 = Sisvon.Infra.ServiceAgent\\Sisvon.Infra.ServiceAgent.csproj
+		SccProjectTopLevelParentUniqueName3 = Sisvon.sln
+		SccProjectName3 = Sisvon.Infra.ServiceAgent
+		SccLocalPath3 = Sisvon.Infra.ServiceAgent
+		SccProjectUniqueName4 = Sisvon.Model\\Sisvon.Model.csproj
+		SccProjectTopLevelParentUniqueName4 = Sisvon.sln
+		SccProjectName4 = Sisvon.Model
+		SccLocalPath4 = Sisvon.Model
+		SccProjectUniqueName5 = SisvonMVC\\SisvonMVC.csproj
+		SccProjectTopLevelParentUniqueName5 = Sisvon.sln
+		SccProjectName5 = SisvonMVC
+		SccLocalPath5 = SisvonMVC
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{842A7AAF-EC1A-411E-B80D-B01A50290DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{842A7AAF-EC1A-411E-B80D-B01A50290DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{842A7AAF-EC1A-411E-B80D-B01A50290DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{842A7AAF-EC1A-411E-B80D-B01A50290DEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76A63653-21F3-4389-AA9F-3AF5B39017E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76A63653-21F3-4389-AA9F-3AF5B39017E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76A63653-21F3-4389-AA9F-3AF5B39017E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76A63653-21F3-4389-AA9F-3AF5B39017E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B118606-EF27-4B0B-BEA7-F5290F8C2443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B118606-EF27-4B0B-BEA7-F5290F8C2443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B118606-EF27-4B0B-BEA7-F5290F8C2443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B118606-EF27-4B0B-BEA7-F5290F8C2443}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C637E761-40A1-4BD0-AFA1-3385E9D0A906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C637E761-40A1-4BD0-AFA1-3385E9D0A906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C637E761-40A1-4BD0-AFA1-3385E9D0A906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C637E761-40A1-4BD0-AFA1-3385E9D0A906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{575A879A-429D-431C-AAC7-AADA032D6558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{575A879A-429D-431C-AAC7-AADA032D6558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{575A879A-429D-431C-AAC7-AADA032D6558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{575A879A-429D-431C-AAC7-AADA032D6558}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66E6D97F-1A5C-4F9C-A834-F8B196511668} = {F964CB9C-4274-413A-961E-ABE3BDFCF6AB}
+		{842A7AAF-EC1A-411E-B80D-B01A50290DEC} = {8515BA70-1CDB-4F75-8D08-68678098BF56}
+		{76A63653-21F3-4389-AA9F-3AF5B39017E0} = {66E6D97F-1A5C-4F9C-A834-F8B196511668}
+		{9B118606-EF27-4B0B-BEA7-F5290F8C2443} = {6F195C86-A557-4126-AB37-F49594167B0B}
+		{C637E761-40A1-4BD0-AFA1-3385E9D0A906} = {8515BA70-1CDB-4F75-8D08-68678098BF56}
+		{B17163CD-32D0-4715-8097-8D63A7BFBAD1} = {F964CB9C-4274-413A-961E-ABE3BDFCF6AB}
+		{575A879A-429D-431C-AAC7-AADA032D6558} = {B17163CD-32D0-4715-8097-8D63A7BFBAD1}
+	EndGlobalSection
+EndGlobal

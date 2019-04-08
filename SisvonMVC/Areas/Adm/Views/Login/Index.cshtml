@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Adm/Views/Shared/_LayoutAdmLogin.cshtml"; ;
+}
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        @using (Html.BeginForm("Logar", "Login", FormMethod.Post))
+        {
+            <div class="col-sm-6 col-sm-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong class="">Login</strong>
+
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="txtLogin" class="col-sm-3 control-label">Login</label>
+                                <div class="col-sm-9">
+                                    <input autofocus type="text" class="form-control" id="txtLogin" name="txtLogin" placeholder="Login">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtSenha" class="col-sm-3 control-label">Senha</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="txtSenha" name="txtSenha" placeholder="Senha">
+                                </div>
+                            </div>
+                            <div class="form-group last">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-success btn-sm">Login</button>
+                                    <button type="reset" class="btn btn-default btn-sm">Apagar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

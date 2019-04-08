@@ -1,0 +1,96 @@
+﻿@using Sisvon.Model.Entities.Enum
+@model IEnumerable<Sisvon.Model.Entities.Pedido>
+
+@{
+    ViewBag.Title = "MeusPedidos";
+}
+
+
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding" method="POST">
+        <h2>Meus Pedidos</h2>
+
+        @if (Model.Any())
+        {
+
+
+            <table class="table">
+                <tr>
+                    <th>
+                        <span>Código</span>
+                    </th>
+                    <th>
+                        <span>Status</span>
+                    </th>
+                    <th>
+                        <span>Data</span>
+                    </th>
+                    <th>
+                        <span>Valor</span>
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    string status ="", classe ="";
+                    
+                    switch (item.Status)
+                    {
+                        case Status.AguardandoPagamento:
+                            status = "Aguardando Pagamento";
+                            classe = "active";
+                            break;
+                        case Status.Cancelado:
+                            status = "Pedido Cancelado";
+                            classe = "danger";
+                            break;
+                        case Status.PagamentoConfirmado:
+                            status = "Pagamento Confirmado";
+                            classe = "warning";
+                            break;
+                        case Status.ProdutoPostado:
+                            status = "Produto Enviado";
+                            classe = "success";
+                            break;
+                            
+                    }
+
+                    <tr class="@classe">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PedidoId)
+                        </td>
+                        <td>
+                            <label>@status</label>
+                        </td>
+                        <td>
+                            <span>@item.DataPedido.ToLocalTime()</span>
+                        </td>
+                        <td>
+                            R$ @Html.DisplayFor(modelItem => item.ValorTotal)
+                        </td>
+                        <td>
+                            @Html.ActionLink(" ", "DetalhePedido", new {id = item.PedidoId}, new {@class = "fa fa-search", title = "Detalhes"})
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+        else
+        {
+            <h4 class="center-text">Voçe nao possui nem um pedido</h4>
+        }
+        <br />
+        <br />
+        <br/>
+        <div class="form-group">
+            <div class="col-xs-5 col-sm-2">
+                @Html.ActionLink("Voltar", "Index", "home", null, new { @class = "btn btn-sm btn-warning" })
+            </div>
+            <div class="col-xs-4 col-sm-5">
+                @Html.ActionLink("Meu Cadastro", "MeuCadastro", null, htmlAttributes: new { @class = "btn btn-sm btn-default" })
+            </div>
+        </div>
+    </div>
+</div>

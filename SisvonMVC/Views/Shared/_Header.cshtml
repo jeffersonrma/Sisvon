@@ -1,0 +1,29 @@
+﻿<nav id="top" class="width100">
+    <ul class="list-inline">
+        <li><a><span class="fa fa-phone"></span> (69)-32247529</a></li>
+    </ul>
+</nav>
+<header>
+    <div class="width100">
+
+        <div id="logo">
+            <a href="@Url.Action("index","Home")"><img src="~/Content/Imagem/weblogo.png" /></a>
+        </div>
+        
+        <div class="col-sm-12 col-offset-250">
+            <div id="header">
+                <div class="col-sm-3">
+                    @Html.Action("UsuarioLogado", "Login")
+                </div>
+                <div class="col-sm-6">
+                    @Html.Action("NavbarBusca", "Home")
+
+                </div>
+                <div class="col-sm-3">
+                    @Html.Action("NavbarCarrinho", "Home")
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>

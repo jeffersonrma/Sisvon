@@ -1,0 +1,45 @@
+﻿@model SisvonMVC.Areas.Adm.ViewModels.RelatorioProdutosVm
+
+@{
+    ViewBag.Title = "Relatorio de Produtos Mais vendidos";
+    ViewBag.H2 = "Relatorio de Produtos Mais vendidos";
+    Layout = "~/Areas/Adm/Views/Shared/_RelatorioLayout.cshtml";
+}
+
+<p><strong>Data Inicial: </strong>@Model.DataInicial.ToString("dd/MM/yyyy")</p>
+<p><strong>Data Final: </strong>@Model.Datafinal.ToString("dd/MM/yyyy")</p>
+
+@if (Model != null || Model.ListaRelatorioProdutosVms.Count < 1)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.ListaRelatorioProdutosVms)
+        {
+            <tr>
+                <td>@item.NomeProduto</td>
+                <td>@item.QtdeProduto</td>
+                <td>R$ @item.ValorProduto.ToString("N")</td>
+            </tr>
+        }
+        
+        </tbody>
+        <tfoot>
+            <tr>
+                <th style="margin-left: 300px">Total</th>
+                <th>@Model.QtdeTotal</th>
+                <th>R$ @Model.ValorTotal.ToString("N")</th>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <h3>nem um produto encontrado</h3>
+}

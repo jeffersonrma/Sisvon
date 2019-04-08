@@ -1,0 +1,214 @@
+﻿@using Sisvon.Model.Entities.Enum
+@model Sisvon.Model.Entities.Pedido
+
+@{
+    ViewBag.Title = "Detalhes";
+
+    string frete = "";
+
+
+    switch (Model.TipoFrete)
+    {
+        case Frete.Pac:
+            frete = "PAC";
+            break;
+        case Frete.Sedex:
+            frete = "SEDEX";
+            break;
+    }
+
+    string pag = "";
+
+
+    switch (Model.FormaPagamento)
+    {
+        case FormaPagamento.Boleto:
+            pag = "Boleto";
+            break;
+        case FormaPagamento.Deposito:
+            pag = "Depósito";
+            break;
+
+    }
+}
+
+<div class="col-sm-12">
+    <div class="body-content-padding">
+        <h2>Aprovar pedido</h2>
+        <h3>Pedido - @Model.PedidoId</h3>
+        <hr/>
+        <h3>Itens</h3>
+        <table style="margin-bottom: 50px" class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Código")
+                </th>
+                <th>
+                    @Html.DisplayName("Nome")
+                </th>
+                <th>
+                    @Html.DisplayName("Preço Un")
+                </th>
+
+                <th>
+                    @Html.DisplayName("Qtde")
+                </th>
+                <th>
+                    @Html.DisplayName("Total")
+                </th>
+
+            </tr>
+
+            @if (Model != null)
+            {
+                foreach (var item in Model.ItemsPedido)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Produto.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Produto.Nome)
+                        </td>
+                        <td>
+                            R$ @item.Produto.Preco.ToString("N")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qtde)
+                        </td>
+                        <td>
+                            R$ @item.PrecoTotal.ToString("N")
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+        <div style="overflow: auto">
+            <div class="col-sm-4" style="overflow: hidden">
+                <h3 class="text-center">Detalhes</h3>
+                <hr/>
+                <dl class="dl-horizontal">
+                    <dt>
+                        <span>Código</span>
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PedidoId)
+                    </dd>
+                    <dt>
+                        <span>Data do Pedido </span>
+                    </dt>
+                    <dd>
+                        <span>@Model.DataPedido.ToShortDateString()</span>
+                    </dd>
+                    <dt>
+                        <span>Cliente</span>
+                    </dt>
+                    <dd>
+                        <span>
+                            @Html.ActionLink(@Model.Cliente.Nome, "ConsultarCliente", "Cliente",
+                                new {id = Model.Cliente.ClienteId},
+                                new { @class = "btn btn-success btn-xs", title = @Model.Cliente.Nome })
+                        </span>
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="col-sm-4">
+                <h3 class="text-center">Pagamento</h3>
+                <hr/>
+                <dl class="dl-horizontal">
+                    <dt>
+                        <span>Forma de pagamento</span>
+                    </dt>
+                    <dd>
+                        <span>@pag</span>
+                    </dd>
+                    <dt>
+                        <span>Data do pagamento</span>
+                    </dt>
+                    <dd>
+                        @(Model.DataPagamento == DateTime.MinValue ? "-" : @Model.DataPagamento.ToShortDateString())
+
+                    </dd>
+
+                    <dt>
+                        <span>Valor Total </span>
+                    </dt>
+                    <dd>
+                        R$ @Model.ValorTotal.ToString("N")
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-sm-4">
+                <h3 class="text-center">Frete</h3>
+                <hr/>
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        <span>Tipo de frete </span>
+                    </dt>
+                    <dd>
+                        <span>@frete</span>
+                    </dd>
+                    <dt>
+                        <span>Data do Envio</span>
+                    </dt>
+                    <dd>
+                        @(Model.DataEnvio == DateTime.MinValue ? "-" : @Model.DataEnvio.ToShortDateString())
+                    </dd>
+                    <dt>
+                        <span>Valor do Frete</span>
+                    </dt>
+                    <dd>
+                        R$ @Model.ValorFrete.ToString("N")
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+        <form style="margin-top: 20px" id="pedidoForm" method="post" action="@Url.Action("AprovarPedido", "Pedido")">
+            @Html.HiddenFor(p => p.PedidoId)
+            <div class="form-group">
+
+                <div class="col-xs-8 ">
+                    @Html.ActionLink("Voltar", "PedidosPendentes", null, new {@class = "btn btn-sm btn-warning"})
+                </div>
+                <div class="col-xs-4">
+                    <button style="width: 100%" type="button" id="btn-submit" class="btn-success btn btn-lg">Aprovar Pedido</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $('#btn-submit').click(function () {
+            bootbox.dialog({
+                title: "Salvar Pedido?",
+                message: "Deseja Aprovar este pedido?",
+                locale: "br",
+                buttons: {
+                    Cancelar: {
+                        label: "Cancelar",
+                        className: "btn-danger"
+                    },
+                    Confirmar: {
+                        label: "Confirmar",
+                        className: "btn-success",
+                        callback: function (result) {
+                            if (result) {
+                                $('form').submit();
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+
+

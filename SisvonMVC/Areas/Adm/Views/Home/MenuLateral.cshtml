@@ -1,0 +1,78 @@
+﻿
+
+<div class="nav-side-menu">
+    <div class="brand">
+        <p>Administração </p>
+    </div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+    <div class="menu-list">
+
+        <ul id="menu-content" class="menu-content collapse out">
+            <li>
+                <a href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                </a>
+            </li>
+
+            <li data-toggle="collapse" data-target="#funcionarios" class="collapsed">
+                <a><i class="fa fa-users fa-lg"></i> Funcionários <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="funcionarios">
+                @if (ViewBag.UsuarioAdm)
+                {
+                    <li class=""><a href="@Url.Action("Index", "Funcionario")">listar</a></li>
+                    <li><a href="@Url.Action("Cadastrar", "Funcionario")">Cadastrar</a></li>
+                }
+                <li><a href="@Url.Action("TrocarSenha", "Funcionario")">Trocar Senha</a></li>
+            </ul>
+            @if (ViewBag.UsuarioAdm)
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Cliente")"><i class="fa fa-user fa-lg"></i> Cliente</a>
+                </li>
+            }
+            <li data-toggle="collapse" data-target="#produtos" class="collapsed">
+                <a><i class="fa fa-gift fa-lg"></i>Produtos  <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="produtos">
+                <li class=""><a href="@Url.Action("Index", "Produto")">Cadastrados</a></li>
+                <li class=""><a href="@Url.Action("Importar", "Produto")">Importar</a></li>
+                <li class=""><a href="@Url.Action("Atualizar", "Produto")">Atualizar</a></li>
+            </ul>
+
+            <li data-toggle="collapse" data-target="#pedidos" class="collapsed">
+                <a><i class="fa fa-shopping-cart fa-lg"></i> Pedidos<span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="pedidos">
+                <li class=""><a href="@Url.Action("PedidosPendentes", "Pedido")">Aprovar</a></li>
+                <li class=""><a href="@Url.Action("Index", "Pedido")">Acompanhar</a></li>
+            </ul>
+            @if (ViewBag.UsuarioAdm)
+            {
+                <li data-toggle="collapse" data-target="#relatorios" class="collapsed">
+                    <a><i class="fa fa-bar-chart-o fa-lg"></i> Relatórios <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="relatorios">
+                    <li class=""><a href="@Url.Action("RelatorioPedidos", "Relatorio")">Pedidos</a></li>
+                    <li><a href="@Url.Action("RelatorioProdutos", "Relatorio")">Produtos Mais Vendidos</a></li>
+                </ul>
+            }
+        </ul>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        var hash = window.location.hash;
+        hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+        $('.nav-tabs a').click(function (e) {
+            $(this).tab('show');
+            var scrollmem = $('body').scrollTop() || $('html').scrollTop();
+            window.location.hash = this.hash;
+            $('html,body').scrollTop(scrollmem);
+        });
+    });
+</script>

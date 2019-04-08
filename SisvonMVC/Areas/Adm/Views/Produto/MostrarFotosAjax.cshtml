@@ -1,0 +1,121 @@
+﻿@model IEnumerable<string>
+
+<ul class="list-inline">
+    @if (Model.Any())
+    {
+        foreach (var nome in Model)
+        {
+            <li class="listaImagem">
+                <img class="img-thumbnail img imgProduto" src="Imagens/Produtos/@nome"/>
+                <a title="Remover" id="btn-Excluir" class="fa fa-remove color-red a" href="#" data-nome ="@nome" ></a>
+            </li>
+        }
+    }
+    <li>
+        <span class="btn btn-default fileinput-button">
+            <span><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+            <input type="file" name="inFoto" id="fu-my-simple-upload" value>
+        </span>
+        <input type="text" id="tbx-file-path" value="Nem uma foto selecionada..." readonly="readonly" />
+        <p><a class="btn btn-success btn-sm" href="#" id="hl-start-upload">Fazer Upload</a></p>
+    </li>
+</ul>
+
+
+<script type="text/javascript">
+    var produtoordem = $('#listaImagens').data("produtoordem");
+    var url = "adm/Produto/UploadFoto?produtoordem=" + produtoordem;
+    var jqXHRData;
+
+    $(document).ready(function () {
+
+        'use strict';
+
+        $('#fu-my-simple-upload').fileupload({
+            url: url,
+            dataType: 'json',
+            add: function (e, data) {
+                jqXHRData = data
+            },
+            done: function (event, data) {
+                if (data.result.isUploaded) {
+                    $("#tbx-file-path").val("Nem uma foto selecionada...");
+                } else {
+
+                }
+                location.reload();
+                alert(data.result.message);
+                
+            },
+            fail: function (event, data) {
+                if (data.files[0].error) {
+                    alert(data.files[0].error);
+                }
+            }
+        });
+    });
+
+    $("#hl-start-upload").on('click', function () {
+        if (jqXHRData) {
+            jqXHRData.submit();
+        }
+        return false;
+    });
+
+    $("#fu-my-simple-upload").on('change', function () {
+        $("#tbx-file-path").val(this.files[0].name);
+    });
+
+    /*REMOVER*/
+
+
+    $('.listaImagem a').click(function () {
+        event.preventDefault();
+        var id = $(this).data("nome");
+        bootbox.dialog({
+            title: "Remover Imagem?",
+            message: "Deseja Remover Esta Imagem?",
+            locale: "br",
+            buttons: {
+                Cancelar: {
+                    label: "Cancelar",
+                    className: "btn-danger"
+                },
+                Confirmar: {
+                    label: "Confirmar",
+                    className: "btn-success",
+                    callback: function (result) {
+                        if (result) {
+                            
+                            $.ajax({
+                                url: '@Url.Action("RemoverImagen", "Produto")',
+                                type: 'POST',
+                                data: { nome: id },
+                                success: function (data) {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    @*$(".listaImagem a").click(function(event) {
+        event.preventDefault();
+        var id = $(this).data("nome");
+        $.ajax({
+            url:'@Url.Action("RemoverImagen", "Produto")',
+            type: 'POST',
+            data: { nome: id },
+            success: function(data) {
+                location.reload();
+            }
+        });
+
+    });*@
+
+</script>
+
+

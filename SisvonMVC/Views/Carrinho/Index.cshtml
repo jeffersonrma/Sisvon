@@ -1,0 +1,139 @@
+﻿@using Sisvon.Model.Entities.Enum
+@model SisvonMVC.ViewModels.CarrinhoVM
+
+@{
+    ViewBag.Title = "Carrinho";
+}
+
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        <h2>Carrinho</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Produto")
+                </th>
+                <th style="width: 25%;">
+                    @Html.DisplayName("Qtde")
+                </th>
+                <th>
+                    @Html.DisplayName("Total")
+                </th>
+            </tr>
+            @if (Model != null && Model.ItensCarrinho.Any())
+            {
+                foreach (var item in Model.ItensCarrinho)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Produto.Nome)
+                        </td>
+                        <td class="form-inline">
+                            <form method="POST" class="input-group" action="@Url.Action("Alterar")">
+                                <input type="hidden" value="@item.CarrinhoId" name="txtItemCarrinhoId" id="txtItemCarrinhoId">
+                                <div class="input-group input-group-sm">
+                                    @Html.EditorFor(model => item.Qtde, null, "txtQtde", new {htmlAttributes = new {@class = "form-control"}})
+                                    <span class="input-group-btn">
+                                        <button name="btnSubmit" value="alterar" type="submit" id="ipAlterar" class="btn-success btn" title="Alterar"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <button name="btnSubmit" value="remover" type="submit" id="ipRemover" class="btn-warning btn" title="Remover"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
+                                    </span>
+                                    
+
+                                </div>
+
+                            </form>
+                            
+                        </td>
+                        <td>
+                            <span>R$: </span> @item.Total.ToString("N")
+                        </td>
+                    </tr>
+                }
+
+            }
+
+            else
+            {
+                <tr>
+                    <td colspan="3">
+                        <h4 class="text-center">Carrinho Vazio</h4>
+                    </td>
+
+                </tr>
+            }
+        </table>
+        @if (Model != null && Model.ItensCarrinho.Any())
+        {
+            
+
+
+            
+            <form method="POST" action="@Url.Action("CalcularFrete")">
+                <hr />
+                <div class="col-sm-9">
+                    <h4>Frete</h4>
+                    @if (Model != null)
+                    {
+                        foreach (Frete frete in Enum.GetValues(typeof(Frete)))
+                        {
+                            string nomefrete = "";
+                            switch (frete)
+                            {
+                                case Frete.Pac:
+                                    nomefrete = "PAC";
+                                    break;
+                                case Frete.Sedex:
+                                    nomefrete = "SEDEX";
+                                    break;
+                            }
+                            <div class="radio">
+                                <label>
+                                    @(frete == Model.FreteSelecionado 
+                                    ? Html.RadioButtonFor(model => Model.FreteSelecionado, (int) frete, new {@checked = ""}) 
+                                    : Html.RadioButtonFor(model => Model.FreteSelecionado, (int) frete))
+                                    @nomefrete
+                                </label>
+                            </div>
+                        }
+                        <button type="submit" id="calcular_frete" class="btn btn-success btn-xs">Calcular Frete</button>
+                    }
+
+                </div>
+
+            </form>
+            <div class="align-right h4">
+                <div class="totalContent">
+                    <span>Frete</span>
+                    @if (Model != null)
+                    {
+                        <span>R$: </span> @Model.ValorFrete
+                    }
+                    else
+                    {
+                        <span>R$:0,00</span>
+                    }<hr />
+                    <strong>Total</strong>
+                    @if (Model != null)
+                    {
+                        <span>R$: </span> @Model.Total.ToString("N")
+                    }
+                    else
+                    {
+                        <span>R$:0,00</span>
+                    }
+                </div>
+            </div>
+            <hr style="width: 100%;" />
+            <div>
+
+                <div class="col-xs-5 col-sm-10">
+                    <a class="btn btn-default" href="@Url.Action("index", "Home")">Continuar Comprando</a>
+                </div>
+                <div class="col-xs-7 col-sm-2 ">
+                    <a href="@Url.Action("Login", "Pedido")" class="btn btn-success" style="width: 100%">Finalizar Pedido</a>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

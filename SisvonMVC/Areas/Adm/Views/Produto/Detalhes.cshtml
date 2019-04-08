@@ -1,0 +1,110 @@
+﻿@model Sisvon.Model.Entities.Produto
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        <h2>@Model.Nome</h2>
+
+        <div>
+            <hr />
+            <fieldset>
+                <legend>Detalhes</legend>
+                <dl class="dl-horizontal">
+                    @Html.HiddenFor(model => model.ProdutoId)
+                    <dt>
+                        @Html.DisplayName("Código")
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Codigo)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Nome")
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Preço")
+                    </dt>
+                    <dd>
+                        @Model.Preco.ToString("C")
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Estoque")
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Estoque) un
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Estoque Disponível")
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.EstoqueDisponivel) un
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Sub Classe/Departamento")
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SubClasse.Nome)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Grupo/Categoria")
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Grupo.Nome)
+                    </dd>
+                </dl>
+            </fieldset>
+            <fieldset>
+                <legend>Exibição</legend>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Destaque)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Destaque)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Vitrine)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Vitrine)
+                    </dd>
+                </dl>
+            </fieldset>
+            <fieldset>
+                <legend>Frete</legend>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayName("Valor PAC")
+                    </dt>
+
+                    <dd>
+                        @Model.ValorPac.ToString("C")
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Valor SEDEX")
+                    </dt>
+
+                    <dd>
+                        @Model.ValorSedex.ToString("C")
+                    </dd>
+                </dl>
+            </fieldset>
+        </div>
+        <div class="form-group">
+
+            <div class="col-md-2">
+                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-sm btn-warning" })
+            </div>
+            <div class="col-md-10">
+                @Html.ActionLink("Editar", "Editar", new { id = Model.ProdutoId, nome = Model.Nome }, new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+</div>
+

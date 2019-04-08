@@ -1,0 +1,87 @@
+﻿@model SisvonMVC.Areas.Adm.ViewModels.RelatorioPedidoVm
+@{
+    ViewBag.Title = "Relatorio de Pedidos";
+    ViewBag.H2 = "Relatorio de Pedidos";
+    Layout = "~/Areas/Adm/Views/Shared/_RelatorioLayout.cshtml";
+}
+
+
+<p><strong>Data Inicial: </strong>@Model.DataInicial.ToString("dd/MM/yyyy")</p>
+<p><strong>Data Final: </strong>@Model.Datafinal.ToString("dd/MM/yyyy")</p>
+
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th><label>Número</label></th>
+            <th><label>Porcentagem</label></th>
+            <th><label>Total</label></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th><label>Vendas Canceladas</label></th>
+            <th>@Model.Cancelado</th>
+            <th>@Model.PorcentagemCanceladoTotal %</th>
+            <th>R$: @Model.CanceladoTotal.ToString("N")</th>
+        </tr>
+        <tr>
+            <td><label>Vendas Canceladas Boleto</label></td>
+            <td>@Model.CanceladoBoleto</td>
+            <td></td>
+            <td>R$: @Model.CanceladoTotalBoleto.ToString("N")</td>
+        </tr>
+        <tr>
+            <td><label>Vendas Canceladas Deposito</label></td>
+            <td>@Model.CanceladoDeposito</td>
+            <td></td>
+            <td>R$: @Model.CanceladoTotalDeposito.ToString("N")</td>
+        </tr>
+
+        <tr>
+            <th><label>Vendas Comcluidas</label></th>
+            <th>@Model.Confirmado</th>
+            <th>@Model.PorcentagemConfirmadoTotal %</th>
+            <th>R$: @Model.ConfirmadoTotal.ToString("N")</th>
+        </tr>
+        <tr>
+            <td><label>Vendas Comcluidas Boleto</label></td>
+            <td>@Model.ConfirmadoBoleto</td>
+            <td></td>
+            <td>R$: @Model.ConfirmadoTotalBoleto.ToString("N")</td>
+        </tr>
+        <tr>
+            <td><label>Vendas Comcluidas Deposito</label></td>
+            <td>@Model.ConfirmadoDeposito</td>
+            <td></td>
+            <td>R$: @Model.ConfirmadoTotalDeposito.ToString("N")</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th> </th>
+            <th><label>Total:</label></th>
+            <th></th>
+            <th>R$: @Model.Total.ToString("N")</th>
+        </tr>
+    </tfoot>
+</table>
+
+
+
+
+@section css{
+
+    <style type="text/css">
+        
+
+        tbody tr th {
+            font-size: 17px;
+        }
+
+        tbody tr td {
+            text-indent: 10px;
+            font-size: 15px;
+        }
+    </style>
+}

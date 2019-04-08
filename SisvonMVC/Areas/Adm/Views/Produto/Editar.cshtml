@@ -1,0 +1,124 @@
+﻿@model Sisvon.Model.Entities.Produto
+
+@{
+    ViewBag.Title = "Editar";
+}
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        <h2>Editar</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>@Model.Nome</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ProdutoId)
+
+                <fieldset>
+                    <legend>Exibição</legend>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nome, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.Nome, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Destaque, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.Destaque)
+                                @Html.ValidationMessageFor(model => model.Destaque, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Vitrine, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.Vitrine)
+                                @Html.ValidationMessageFor(model => model.Vitrine, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ativo, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.Ativo)
+                                @Html.ValidationMessageFor(model => model.Ativo, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Fotos</legend>
+                    <div id="listaImagens" data-produtoordem="@Model.Ordem">
+                        @* Ajax Imagens *@
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Frete</legend>
+
+                    <div class="form-group">
+                        @Html.Label("Valor PAC", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ValorPac, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ValorPac, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Valor SEDEX", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ValorSedex, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ValorSedex, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+                </fieldset>
+                <fieldset>
+                    <legend>Descrição</legend>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                </fieldset>
+
+                <div class="form-group">
+
+                    <div class="col-md-2">
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-sm btn-warning" })
+                    </div>
+                    <div class="col-md-10">
+                        <input type="submit" value="Save" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<script src="~/Scripts/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "#Descricao",
+        plugins: [
+      'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      'searchreplace wordcount visualblocks visualchars code fullscreen',
+      'insertdatetime media nonbreaking save table contextmenu directionality',
+      'emoticons template paste textcolor colorpicker textpattern imagetools'
+        ],
+        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        toolbar2: ' preview media | forecolor backcolor',
+        image_advtab: true,
+        language: 'pt_BR'
+    });
+</script>

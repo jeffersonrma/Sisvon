@@ -1,0 +1,79 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Sisvon.Model.Entities.Funcionario>
+
+
+@{
+    ViewBag.Title = "Funcionários";
+}
+
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        <h2>Funcionários</h2>
+
+        <form class="col-sm-5" method="GET" style="padding-bottom: 80px;">
+            <h4>Filtrar resultado:</h4>
+            <hr />
+            <div class="form-horizontal">
+                <div class="form-group form-group-sm">
+                    <label class="control-label col-sm-2" for="busca">buscar:</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="busca" placeholder="Nome" name="busca" value="@ViewBag.busca" />
+                    </div>
+                </div>
+
+                <div class="form-group-sm form-group ">
+                    <button class="btn btn-success align-right" type="submit">Buscar</button>
+                </div>
+
+            </div>
+        </form>
+
+        <p class="col-sm-12">
+            @Html.ActionLink("Cadastrar novo", "Cadastrar", null, new { @class = "btn btn-sm btn-success" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Nome")
+                </th>
+                <th>
+                    @Html.DisplayName("Login")
+                </th>
+                <th>
+                    @Html.DisplayName("Administrador")
+                </th>
+                <th></th>
+            </tr>
+
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Login)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Administrador)
+                        </td>
+                        <td>
+                            @Html.ActionLink(" ", "Detalhes", new {id = item.FuncionarioId}, new {@class = "fa fa-search", title = "Detalhes"}) |
+                            @Html.ActionLink(" ", "Editar", new {id = item.FuncionarioId}, new {@class = "fa fa-pencil", title = "Editar"}) |
+                            @Html.ActionLink(" ", "Deletar", new {id = item.FuncionarioId}, new {@class = "fa fa-remove color-red", title = "Remover"})
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+        @if (Model != null && (Model.HasNextPage || Model.HasPreviousPage))
+        {
+            <div class="text-center">
+                @Html.PagedListPager(Model, p => Url.Action("Index", new { page = p, busca = ViewBag.busca }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+            </div>
+        }
+    </div>
+</div>

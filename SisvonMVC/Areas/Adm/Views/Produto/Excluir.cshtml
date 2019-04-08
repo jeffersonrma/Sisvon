@@ -1,0 +1,109 @@
+﻿@model Sisvon.Model.Entities.Produto
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        <h2>Excluir</h2>
+
+        <h3>Deletar este produto?</h3>
+        <div>
+            <h4>@Model.Nome</h4>
+            <hr />
+            <fieldset>
+                <legend>Detalhes</legend>
+                <dl class="dl-horizontal">
+                    
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Codigo)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Codigo)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Preco)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Preco)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Grupo)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Grupo.Nome)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SubClasse)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SubClasse.Nome)
+                    </dd>
+                </dl>
+            </fieldset>
+            <fieldset>
+                <legend>Exibição</legend>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Destaque)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Destaque)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Vitrine)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Vitrine)
+                    </dd>
+                </dl>
+            </fieldset>
+            <fieldset>
+                <legend>Frete</legend>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ValorPac)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ValorPac)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ValorSedex)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ValorSedex)
+                    </dd>
+
+                </dl>
+            </fieldset>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ProdutoId)
+                <div class="form-actions no-color">
+
+                    <div class="col-md-2">
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-sm btn-warning" })
+                    </div>
+                    <div class="col-md-10">
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+﻿@model Sisvon.Model.Entities.Cliente
+
+@{
+    ViewBag.Title = "Consultar Cliente";
+}
+
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+
+        <div>
+            <h2>Consultar Cliente</h2>
+            <h4>@Model.Nome - @Model.Email</h4>
+            <hr/>
+            <fieldset class="col-sm-6">
+                <legend>Dados Pessoais</legend>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayName("Nome")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("CPF")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Cpf)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("RG")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Rg)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Telefone")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Telefone)
+                    </dd>
+                </dl>
+            </fieldset>
+            <fieldset class="col-sm-6">
+                <legend>Endereço para entrega</legend>
+
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayName("CEP")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Cep)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("UF")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Uf)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Cidade")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Cidade)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Rua")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Rua)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Número")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Numero)
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Complemento")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Complemento)
+                    </dd>
+                </dl>
+            </fieldset>
+        </div>
+        <p>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <button onclick="goBack()" class="btn btn-sm btn-warning">Voltar</button>
+                </div>
+            </div>
+        </p>
+    </div>
+</div>

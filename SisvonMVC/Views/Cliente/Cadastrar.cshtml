@@ -1,0 +1,420 @@
+﻿@model Sisvon.Model.Entities.Cliente
+
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+<div class="col-sm-12 bg-color-white">
+    <div class=" body-content-padding">
+        <h2>Cadastro</h2>
+
+        <form id="clienteForm" method="POST">
+
+            @Html.AntiForgeryToken()
+            @Html.Hidden("pedido", ViewData["pedido"])
+            <div class="form-horizontal">
+                <h4>Preencha os campos</h4>
+                <hr />
+                <fieldset class="col-sm-6">
+                    <legend>Dados Pessoais</legend>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Nome</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">CPF</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">RG</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Rg, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Rg, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Telefone</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-sm-6">
+                    <legend>Endereço para entrega</legend>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">CEP</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Cep, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">UF</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Uf, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Uf, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Cidade</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Rua</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Rua, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Rua, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Bairro</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Número</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Complemento</label>
+                        <div class="col-sm-9">
+                            @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="col-sm-12">
+
+                    <fieldset class="col-sm-6 col-sm-offset-3">
+                        <legend>Dados de login</legend>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">E-Mail</label>
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Senha</label>
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Confirmar Senha</label>
+                            <div class="col-sm-9">
+                                @Html.Editor("confirmarSenha", new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                @Html.ValidationMessage("confirmarSenha", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-5 col-sm-2">
+                    @Html.ActionLink("Voltar", "Index", "home", null, new { @class = "btn btn-sm btn-warning" })
+                </div>
+                <div class="col-xs-7 col-sm-10">
+                    <input type="submit" value="Cadastrar" class="btn btn-success" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/jquery.maskedinput.js"></script>
+
+
+    <script type="text/javascript">
+        /*ADD VALIDAR CPF*/
+        jQuery.validator.addMethod("cpf", function (value, element) {
+            value = jQuery.trim(value);
+
+            value = value.replace('.', '');
+            value = value.replace('.', '');
+            cpf = value.replace('-', '');
+            while (cpf.length < 11) cpf = "0" + cpf;
+            var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
+            var a = [];
+            var b = new Number;
+            var c = 11;
+            for (i = 0; i < 11; i++) {
+                a[i] = cpf.charAt(i);
+                if (i < 9) b += (a[i] * --c);
+            }
+            if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11 - x }
+            b = 0;
+            c = 11;
+            for (y = 0; y < 10; y++) b += (a[y] * c--);
+            if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11 - x; }
+
+            var retorno = true;
+            if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
+
+            return this.optional(element) || retorno;
+
+        }, "O CPF digitado é inválido");
+
+        /*VALIDAR*/
+        $("#clienteForm").validate({
+            rules: {
+                Nome: {
+                    required: true,
+                    rangelength: [2, 30]
+                },
+                Cpf: {
+                    required: true,
+                    cpf: true,
+                    remote: {
+                        url: "@Url.Action("VerificarClienteEmUso")",
+                        type: "post",
+                        data: {
+                            Cpf: function () {
+                                return $("#Cpf").val();
+                            }
+                        },
+                        dataType: 'json'
+                    }
+                },
+                Rg: {
+                    required: true,
+                    remote: {
+                        url: "@Url.Action("VerificarClienteEmUso")",
+                        type: "post",
+                        data: {
+                            Rg: function () {
+                                return $("#Rg").val();
+                            }
+                        },
+                        dataType: 'json'
+                    }
+                },
+                Telefone: {
+                    required: true
+                },
+                Cep: {
+                    required: true
+                },
+                Cidade: {
+                    required: true
+                },
+                Uf: {
+                    required: true
+                },
+                Rua: {
+                    required: true
+                },
+                Bairro: {
+                    required: true
+                },
+                Numero: {
+                    required: true
+                },
+                Email: {
+                    required: true,
+                    email: true,
+                    remote: {
+                        url: "@Url.Action("VerificarClienteEmUso")",
+                        type: "post",
+                        data: {
+                            Email: function () {
+                                return $("#Email").val();
+                            }
+                        },
+                        dataType: 'json'
+                    }
+                },
+                Senha: {
+                    required: true,
+                    rangelength: [6, 12]
+                },
+                confirmarSenha: {
+                    required: true,
+                    equalTo: '#Senha'
+                }
+
+            },
+            messages: {
+                Nome: {
+                    required: 'O campo nome é obrigatório',
+                    rangelength: 'O nome deve ter entre 2 e 30 letras'
+                },
+                Cpf: {
+                    required: 'O campo CPF é obrigatório',
+                    remote: 'O CPF já está em uso'
+                },
+                Rg: {
+                    required: 'O campo RG é obrigatório',
+                    remote: 'O RG já está em uso'
+                },
+                Telefone: {
+                    required: 'O campo telefone é obrigatório'
+                },
+                Cep: {
+                    required: 'O campo CEP é obrigatório'
+                },
+                Cidade: {
+                    required: 'O campo cidade é obrigatório'
+                },
+                Uf: {
+                    required: 'O campo estado é obrigatório'
+                },
+                Rua: {
+                    required: 'O campo rua é obrigatório'
+                },
+                Bairro: {
+                    required: 'O campo bairro é obrigatório'
+                },
+                Numero: {
+                    required: 'O campo número é obrigatório'
+                },
+                Email: {
+                    required: 'O campo e-mail é obrigatório',
+                    email: 'Digite um e-mail válido',
+                    remote: 'O e-mail já está em uso'
+                },
+                Senha: {
+                    required: 'O campo senha é obrigatório',
+                    rangelength: 'A senha deve ter entre 6 e 12 caracteres'
+                },
+                confirmarSenha: {
+                    required: 'O campo confirmar senha é obrigatório',
+                    equalTo: 'Repita a mesma senha novamente'
+                }
+            },
+
+
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+
+        });
+
+
+        /*MASCARA*/
+        $(function () {
+            $("#Cpf").mask("999.999.999-99");
+            $('#Rg').mask("99.999.999-9");
+            $('#Cep').mask("99999-999");
+            $('#Telefone').mask("(99) 99999-999?9",{completede: function() {
+                $('#Telefone').mask("(99) 9999-99999");
+            }});
+        });
+
+        /*ADD REMOVE CEP ERROR*/
+        var validator = {};
+
+        function addError(message) {
+            $("#clienteForm").valid();
+            removeError();
+            $('#Cep').closest('.form-group').addClass('has-error');
+            $("<span id='Cep-error-wc' class='text-danger '>" + message + "</span>").insertAfter('#Cep');
+
+        }
+
+        function removeError() {
+            $("#clienteForm").valid();
+            $('#Cep').closest('.form-group').removeClass('has-error');
+            $('#Cep-error-wc').remove();
+
+        }
+        /*CEP*/
+        $(document).ready(function () {
+
+            function limpaFormulárioCep() {
+                $("#Rua").val("");
+                $("#Bairro").val("");
+                $("#Cidade").val("");
+                $("#Uf").val("");
+                $("#Numero").attr("placeholder", "");
+            }
+
+            $("#Cep").blur(function () {
+
+                var cep = $(this).val().replace(/\D/g, '');
+
+                if (cep != "") {
+
+                    var validacep = /^[0-9]{8}$/;
+
+                    if (validacep.test(cep)) {
+
+                        $("#Rua").val("...");
+                        $("#Bairro").val("...");
+                        $("#Cidade").val("...");
+                        $("#Uf").val("...");
+
+                        $.getJSON("//viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+                            if (!("erro" in dados)) {
+                                $("#Rua").val(dados.logradouro);
+                                $("#Bairro").val(dados.bairro);
+                                $("#Cidade").val(dados.localidade);
+                                $("#Uf").val(dados.uf);
+                                $("#Numero").attr("placeholder", dados.complemento);
+                                removeError();
+                            }
+                            else {
+
+                                limpaFormulárioCep();
+                                addError('CEP não encontrado!');
+                            }
+                        });
+                    }
+                    else {
+
+                        limpaFormulárioCep();
+                        /*Formato invalido*/
+                        addError();
+                    }
+                }
+                else {
+                    removeError();
+                    limpaFormulárioCep();
+
+                }
+            });
+
+
+        });
+
+    </script>
+}

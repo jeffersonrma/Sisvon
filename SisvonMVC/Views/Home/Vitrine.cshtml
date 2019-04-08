@@ -1,0 +1,21 @@
+﻿@using System.Linq
+@model System.Collections.Generic.IEnumerable<Sisvon.Model.Entities.Produto>
+
+@if (Model != null && Model.Any())
+{
+    <ul class="produto-lista">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a class="produto-lista-content" href="@Url.Action("Detalhes", "Produto", new {id = item.ProdutoId, produtoNome = item.Nome})">
+                    @Html.Action("MostrarUmaFoto", "Produto", new { produtoOrdem = item.Ordem })
+                    <div id="caption">
+                        <span id="nome">@item.Nome</span>
+                        <span id="codigo">cod:@item.Codigo</span>
+                        <span id="preco">@(item.EstoqueDisponivel > 0 ? "R$" + item.Preco.ToString("N") : "Produto indisponível")</span>
+                    </div>
+                </a>
+            </li>
+        }
+    </ul>
+}

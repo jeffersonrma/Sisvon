@@ -1,0 +1,126 @@
+﻿@using Sisvon.Model.Entities.Enum
+@model SisvonMVC.ViewModels.CarrinhoVM
+
+@{
+    ViewBag.Title = "Resumo";
+}
+@{
+
+
+    string frete = "";
+
+
+    switch (Model.FreteSelecionado)
+    {
+        case Frete.Pac:
+            frete = "PAC";
+            break;
+        case Frete.Sedex:
+            frete = "SEDEX";
+            break;
+    }
+
+    string pag = "";
+
+
+    switch (Model.FormaPagamento)
+    {
+        case FormaPagamento.Boleto:
+            pag = "Boleto";
+            break;
+        case FormaPagamento.Deposito:
+            pag = "Depósito";
+            break;
+
+    }
+}
+<div class="col-sm-12 bg-color-white">
+    <form class=" body-content-padding" action="@Url.Action("GerarPedido")" method="POST">
+        <h2>Resumo do pedido</h2>
+        <hr />
+        <div class="col-sm-12">
+            <table style="margin-bottom: 50px" class="table table-bordered">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Produto")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Qtde")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Total")
+                    </th>
+                </tr>
+                @if (Model != null)
+                {
+                    foreach (var item in Model.ItensCarrinho)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Produto.Nome)
+                            </td>
+                            <td class="form-inline">
+                                @item.Qtde
+                            </td>
+                            <td>
+                                <span>R$: </span> @item.Total;
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <div class="col-sm-4 ">
+            <h3 class="text-center">Detalhes</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    <span>Frete:</span>
+                </dt>
+                <dd>
+                   @(Model == null ? "" : frete)
+                </dd>
+                <dt>
+                    <span>Tipo de pagamento: </span>
+                </dt>
+                <dd>
+                    @(Model == null ? "" : pag)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-sm-4 col-sm-offset-4">
+            <h3 class="text-center">Total do Pedido</h3>
+            <hr />
+            <div >
+                <dl class="dl-horizontal">
+                    <dt>
+                        <span>Valor: </span>
+                    </dt>
+                    <dd>
+                        <span>R$: </span> @(Model == null ? "" : Model.TotalProdutos.ToString())
+                    </dd>
+                    <dt>
+                        <span>Frete: </span>
+                    </dt>
+                    <dd>
+                        <span>R$: </span> @(Model == null ? "" : Model.ValorFrete.ToString())
+                    </dd>
+                </dl>
+                <div class="totalContent h4">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            <strong>Total:</strong>
+                        </dt>
+                        <dd>
+                            <span>R$: </span> @(Model == null ? "0,00" : Model.Total.ToString())
+                        </dd>
+                    </dl>
+                </div>
+
+            </div>
+        </div>
+        <div style="margin-top: 20px" class="col-sm-12 text-right">
+            <button type="submit" class="btn btn-success">Finalizar compra</button>
+        </div>
+    </form>
+</div>

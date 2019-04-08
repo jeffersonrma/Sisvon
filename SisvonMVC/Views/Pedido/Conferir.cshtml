@@ -1,0 +1,54 @@
+﻿@model SisvonMVC.ViewModels.CarrinhoVM
+
+@{
+    ViewBag.Title = "Conferir";
+}
+
+<div class="bg-color-white col-sm-12">
+    <div class="body-content-padding">
+        <h2>Conferir</h2>
+        <div>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Produto")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Qtde")
+                    </th>
+                </tr>
+                @if (Model != null)
+                {
+                    foreach (var item in Model.ItensCarrinho)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Produto.Nome)
+                            </td>
+                            <td>
+                                @Html.EditorFor(modelItem => item.Qtde)
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+            <div class="text-right h4">
+                <div class="totalContent">
+                    <strong>Total</strong>
+                    @if (Model != null)
+                    {
+                        <span>R$: </span>Html.DisplayForModel(Model.Total);
+                    }
+                    else
+                    {
+                        <span>R$:0,00</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
